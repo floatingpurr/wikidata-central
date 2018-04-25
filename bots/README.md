@@ -1,0 +1,2 @@
+# wikidata-scripts Bots section 🤖
+
