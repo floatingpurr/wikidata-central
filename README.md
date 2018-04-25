@@ -1,4 +1,4 @@
-# wikidata-scripts 🚀
-A bunch of scripts for interacting with Wikidata.
+# Wikidata utils 🚀
+A bunch of utils for dealing with Wikidata.
 
 This is an informal repository 🙃
