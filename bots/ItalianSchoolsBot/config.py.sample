@@ -1,0 +1,8 @@
+"""
+Login options, replace this file with bot_login.py
+"""
+
+USER='<bot user name>'
+PWD='<bot password>'
+
+FILENAME = '<data file>'
