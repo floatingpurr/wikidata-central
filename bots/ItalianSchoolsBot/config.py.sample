@@ -5,4 +5,5 @@ Login options, replace this file with bot_login.py
 USER='<bot user name>'
 PWD='<bot password>'
 
-FILENAME = '<data file>'
+DATA_FILE = '<data file>'
+REPORT_FILE = '<report file'
