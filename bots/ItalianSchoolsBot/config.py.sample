@@ -1,5 +1,5 @@
 """
-Login options, replace this file with bot_login.py
+Login options and basic conf, replace this file with bot_login.py
 """
 
 USER='<bot user name>'
