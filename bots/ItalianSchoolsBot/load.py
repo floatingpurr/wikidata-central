@@ -62,7 +62,7 @@ def pre_load(filename):
         for row in reader:
 
             school = dict()
-            school['name'] = row[8].replace('"', '')
+            school['name'] = row[8].replace('"', '').title()
             if row[10] == '': # create new school
                 school['wiki_item'] = None
             else:
