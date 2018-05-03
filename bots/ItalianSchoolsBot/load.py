@@ -80,6 +80,7 @@ def pre_load(filename):
 
             school = dict()
             school['name'] = row[8].replace('"', '').title()
+            
             if row[10] != '': # create new school
                 school['wiki_item'] = row[10].split('https://www.wikidata.org/wiki/')[1]
             elif row[7] in test_map: #TODO: remove the check on row[7] after test run       
@@ -88,8 +89,8 @@ def pre_load(filename):
                 school['wiki_item'] = None
 
         
-            school['desc_it'] = row[15].title() + ' di ' + row[13].title() + ' in provinica di ' +row[4].title() +' (Italia)'
-            school['desc_en'] = row[27].title() + ' in ' + row[13].title() + ' in the province of ' +row[4].title() + ' (Italy)'
+            school['desc_it'] = row[15].lower() + ' di ' + row[13].title() + ' in provinica di ' +row[4].title() +' (Italia)'
+            school['desc_en'] = row[27].lower() + ' in ' + row[13].title() + ' in the province of ' +row[4].title() + ' (Italy)'
             school['category'] = row[26].split('https://www.wikidata.org/wiki/')[1]
             school['address'] = "{via}, {cap} {com}".format(via = row[9].title(), com = row[13].title(), cap = row[11])
             school['zip'] = row[11]
