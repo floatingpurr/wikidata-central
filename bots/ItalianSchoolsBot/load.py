@@ -70,9 +70,9 @@ def pre_load(filename):
             test_map[row[1]] = row[0]
         
 
-
+    # data file
     with open(filename, newline='') as File:  
-        reader = csv.reader(File)
+        reader = csv.reader(File, delimiter=';')
         
         next(reader) # skip first line
 
@@ -81,11 +81,13 @@ def pre_load(filename):
             school = dict()
             school['name'] = row[8].replace('"', '').title()
             
-            if row[10] != '': # create new school
+            if row[10] != '':
                 school['wiki_item'] = row[10].split('https://www.wikidata.org/wiki/')[1]
+                print ('Found existing entry in source file')
             elif row[7] in test_map: #TODO: remove the check on row[7] after test run       
                 school['wiki_item'] = test_map[ row[7] ]
-            else:
+                print ('Found existing entry in permanent map')
+            else: # create new school
                 school['wiki_item'] = None
 
         
