@@ -93,8 +93,8 @@ def pre_load(filename):
                 school['wiki_item'] = None
 
         
-            school['desc_it'] = row[15].lower() + ' di ' + row[13].title() + ' in provinica di ' +row[4].title() +' (Italia)'
-            school['desc_en'] = row[27].lower() + ' in ' + row[13].title() + ' in the province of ' +row[4].title() + ' (Italy)'
+            school['desc_it'] = row[15].lower() + ' di ' + row[13].title() + ' in provinica di ' +row[4].title() +' (Italia) [codice scuola: {}]'.format(row[7]) 
+            school['desc_en'] = row[27].lower() + ' in ' + row[13].title() + ' in the province of ' +row[4].title() + ' (Italy) [school id: {}]'.format(row[7]) 
             school['category'] = row[26].split('https://www.wikidata.org/wiki/')[1]
             school['address'] = "{via}, {cap} {com}".format(via = row[9].title(), com = row[13].title(), cap = row[11])
             school['zip'] = row[11]
