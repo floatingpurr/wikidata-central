@@ -23,6 +23,8 @@ REPORT_FILE = os.path.join(dirname, config.REPORT_FILE)
 LOG_DIR = dirname+"/logs"
 
 
+# setup logging
+wdi_core.WDItemEngine.setup_logging(log_dir = LOG_DIR, header=json.dumps({'name': 'Italian Schools', 'timestamp': str(datetime.now()), 'run_id': str(datetime.now())}))
 
 
 ITEMS = {
@@ -100,10 +102,10 @@ def pre_load(filename):
             school['externalID'] = row[7]
 
             # check email -  TODO: not available for test run
-            # if EMAIL_REGEX.match(row[18]):
-            #     school['email'] = "mailto:"+row[18]
-            # else:
-            #     school['email'] = None
+            if EMAIL_REGEX.match(row[18]):
+                school['email'] = "mailto:"+row[18]
+            else:
+                school['email'] = None
 
             schools.append(school)
 
@@ -125,6 +127,9 @@ def create_reference():
 def wd_load(login_instance, dataset, base_reference):
     """Load the dataset in Wikidata adding a basereference where necessary."""
 
+    i = 0
+
+
     for item in dataset:
         data = list()
         
@@ -136,8 +141,8 @@ def wd_load(login_instance, dataset, base_reference):
         data.append( wdi_core.WDString(item['externalID'], PROPS['Italian School ID'], references=[base_reference]) )
         
         # TODO: not available for test run
-        #if item['email'] is not None:
-        #     data.append( wdi_core.WDString(item['email'], PROPS['email'], references=[base_reference]) )
+        if item['email'] is not None:
+            data.append( wdi_core.WDString(item['email'], PROPS['email'], references=[base_reference]) )
 
 
         # Search for and then edit/create new item
@@ -156,14 +161,22 @@ def wd_load(login_instance, dataset, base_reference):
 
         wd_item.write(login_instance)
 
-        # update report
+        i += 1
+
+        if i % 100 == 0:
+            print ("Upserted {} items".format(i))
+
+        # update report and log
+        msg = '{},{}'.format( wd_item.wd_item_id, item['externalID'] )
+        wdi_core.WDItemEngine.log("WARNING", msg)
+
         if item['wiki_item'] is None: 
             FINAL_REPORT.append( ( wd_item.wd_item_id, item['externalID'], 'I' ) )
         else:
             FINAL_REPORT.append( ( wd_item.wd_item_id, item['externalID'], 'U' ) )
 
-        print('Waiting...')
-        sleep(10) 
+        # print('Waiting...')
+        # sleep(10) 
 
     # return FINAL_REPORT
 
@@ -180,8 +193,6 @@ def save_report(report, file):
 
 if __name__ == "__main__":
     """ let's go! """
-    # setup logging
-    #wdi_core.WDItemEngine.setup_logging(log_dir = LOG_DIR, header=json.dumps({'name': 'Italian Schools', 'timestamp': str(datetime.now()), 'run_id': str(datetime.now())}))
 
     # load data in memory
     dataset = pre_load(DATA_FILE)
