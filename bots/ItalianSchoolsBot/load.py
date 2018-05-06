@@ -85,10 +85,10 @@ def pre_load(filename):
             
             if row[10] != '':
                 school['wiki_item'] = row[10].split('https://www.wikidata.org/wiki/')[1]
-                # print ('Found existing entry in source file')
+                print ('Found existing entry in source file')
             elif row[7] in test_map: #TODO: remove the check on row[7] after test run       
                 school['wiki_item'] = test_map[ row[7] ]
-                # print ('Found existing entry in permanent map')
+                print ('Found existing entry in permanent map')
             else: # create new school
                 school['wiki_item'] = None
 
@@ -176,7 +176,7 @@ def wd_load(login_instance, dataset, base_reference):
             FINAL_REPORT.append( ( wd_item.wd_item_id, item['externalID'], 'U' ) )
 
         # print('Waiting...')
-        # sleep(10) 
+        sleep(1) 
 
     # return FINAL_REPORT
 
