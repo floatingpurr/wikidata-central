@@ -16,7 +16,7 @@ import json
 
 FINAL_REPORT = list()
 
-dirname = os.path.dirname(__file__)
+dirname = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(dirname, config.DATA_FILE)
 MAP_FILE = os.path.join(dirname, 'test_data/permanent_map.csv')
 REPORT_FILE = os.path.join(dirname, config.REPORT_FILE)
