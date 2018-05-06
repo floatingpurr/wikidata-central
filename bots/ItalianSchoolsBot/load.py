@@ -167,7 +167,7 @@ def wd_load(login_instance, dataset, base_reference):
             print ("Upserted {} items".format(i))
 
         # update report and log
-        msg = '{},{}'.format( wd_item.wd_item_id, item['externalID'] )
+        msg = '{};{}'.format( wd_item.wd_item_id, item['externalID'] )
         wdi_core.WDItemEngine.log("WARNING", msg)
 
         if item['wiki_item'] is None: 
