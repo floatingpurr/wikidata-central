@@ -168,7 +168,7 @@ def wd_load(login_instance, dataset, base_reference):
 
         # update report and log
         msg = '{},{}'.format( wd_item.wd_item_id, item['externalID'] )
-        wdi_core.WDItemEngine.log(msg)
+        wdi_core.WDItemEngine.log("WARNING", msg)
 
         if item['wiki_item'] is None: 
             FINAL_REPORT.append( ( wd_item.wd_item_id, item['externalID'], 'I' ) )
