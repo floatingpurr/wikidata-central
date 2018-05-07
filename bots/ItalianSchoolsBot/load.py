@@ -176,7 +176,7 @@ def wd_load(login_instance, dataset, base_reference):
             FINAL_REPORT.append( ( wd_item.wd_item_id, item['externalID'], 'U' ) )
 
         # print('Waiting...')
-        sleep(1) 
+        sleep(2) 
 
     # return FINAL_REPORT
 
